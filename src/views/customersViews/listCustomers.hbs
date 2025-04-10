@@ -1,0 +1,24 @@
+<div class="container">
+    <h2>Lista zarejestrowanych klientów</h2>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Kolejność[#]</th>
+                <th>Nazwa</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {{#each customers}}
+            <tr>
+                <td>{{ plusOne @index}}</td>
+                <td>{{this.name}}</td>
+                <td><a class="btn btn-primary" href="/{{this._id}}">Szczegóły</a><a class="btn btn-secondary" href="/edit/{{this._id}}">Edytuj</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <a href="/add" class="btn btn-primary">Dodaj klienta</a>
+
+</div>

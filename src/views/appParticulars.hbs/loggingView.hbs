@@ -1,0 +1,23 @@
+<div class="container">
+    <h1>Logowanie użytkownika</h1>
+
+    {{#if error}}
+    <div class="alert alert-annoucement" role="alert">
+        {{message}}
+    </div>
+    {{/if}}
+
+    <form action="/user/login" method="POST">
+        <div class="email">
+            <label for="email" class="form-email">Wpisz adres email</label>
+            <input type="email" class="form-filling" name="email" id="email" value="{{user.email}} " required>
+        </div>
+        <br>
+        <div class="password">
+            <label for="email" class="form-email">Wpisz hasło</label>
+            <input type="password" class="form-filling2" name="password" id="password" value="{{user.password}}"
+                required>
+        </div>
+        <button class="button button-of-logging">Zaloguj</button>
+    </form>
+</div>

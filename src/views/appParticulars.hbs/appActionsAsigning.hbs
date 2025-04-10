@@ -1,0 +1,23 @@
+<div class="container-add-action">
+    <h4>Dodaj akcję dla: {{}}</h4>
+    <ul>
+        <li>Email: {{}}</li>
+        <li>Telefon: {{}}</li>
+    </ul>
+
+    <form action="//{{}}/" method="POST">
+        <div class="form-group">
+            <label for="contactDate">Data kontaktu:</label>
+            <input type="date" id="contactDate" name="contactDate" required>
+        </div>
+        <div class="form-group">
+            <label for="actionType">Rodzaj akcji:</label>
+            <input type="text" id="actionType" name="actionType" required>
+        </div>
+        <div class="form-group">
+            <label for="actionDescription">Opis akcji:</label>
+            <textarea id="actionDescription" name="actionDescription" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Dodaj akcję</button>
+    </form>
+</div>
