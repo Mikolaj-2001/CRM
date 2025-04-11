@@ -7,10 +7,10 @@ module.exports = (req, res, next) => {
 
         try {
             const verified = jwt.verify(newToken, process.env.TOKEN_ACCESS);
-            User.findById(verified._id).then((user) => {
-                res.locals.userId = user._id;
-                res.locals.userName = user.name;
-                res.locals.userEmail = user.email
+            User.findById(verified._id).then((customer) => {
+                res.locals.userId = customer._id;
+                res.locals.userName = customer.name;
+                res.locals.userEmail = customer.email
                 next();
             })
                 .catch((err) => {
@@ -18,11 +18,11 @@ module.exports = (req, res, next) => {
                 })
 
         } catch {
-            res.redirect('loginRedirect=true')
+            res.redirect('')
         }
 
 
     } else {
-        res.redirect('loginRedirect=true')
+        res.redirect('')
     }
 }

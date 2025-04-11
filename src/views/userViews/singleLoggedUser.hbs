@@ -1,10 +1,20 @@
 <div class="container4">
-    <h4>{{this.loggedUser}}</h4>
+    <h4>{{this.loggedCustomer}}</h4>
 
     <ul>
-        <li><b></b></li>
-        <li><b></b></li>
-        <li><b></b></li>
+        <p><b>Dane Klienta:</b></p>
+        <br>
+        <li><b>{{this.fulName}}</b></li>
+        <br>
+        <li><b>{{this.address.street}}</b></li>
+        <br>
+        <li><b>{{this.address.postCode}}</b></li>
+        <br>
+        <li><b>{{this.address.city}}</b></li>
+        <br>
+        <li><b>{{this.nip}}</b></li>
+        <br>
+        <li><b>{{this.phoneNumber}}</b></li>
     </ul>
 
     {{#if }}
@@ -12,9 +22,13 @@
         {{#each}}
         <li>
             <b></b>
+            <br>
             <b></b>
+            <br>
             <b></b>
+            <br>
             <b></b>
+            <br>
             <b></b>
         </li>
         {{/each}}

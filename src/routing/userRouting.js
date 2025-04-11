@@ -1,4 +1,4 @@
-/* const express = require('express')
+const express = require('express')
 const secondRouting = express.Router()
 
 const userController = require("../appControl/userCon")
@@ -12,7 +12,7 @@ secondRouting.get('', (req, res) => {
     if (req.query.loginRedirect) {
         res.render('', {
             error: true,
-            message: "Zaloguj się,aby użytkować aplikacje"
+            message: "Zaloguj się,aby uzyskać dostęp"
         })
         return
     }
@@ -22,4 +22,4 @@ secondRouting.get('', (req, res) => {
 secondRouting.post('', userController.login)
 secondRouting.get('', userController.logout)
 
-module.exports = secondRouting */
+module.exports = secondRouting

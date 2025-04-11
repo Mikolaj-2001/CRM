@@ -7,50 +7,50 @@ module.exports = {
     newUser
       .save()
       .then(() => {
-        res.redirect("");
+        res.redirect("/addCustomer");
       })
       .catch((err) => {
         if (err.code === 11000) {
-          res.render("", {
+          res.render("customerViews/customerList", {
             error: true,
             message: "Użytkownik o tych danych już istnieje",
-            user: req.body,
+            customer: req.body,
           });
         }
       });
   },
   login: (req, res) => {
     User.findOne({ email: req.body.email })
-      .then((loggedUser) => {
+      .then((loggedCustomer) => {
 
-        if (!loggedUser) {
-          res.render("", {
+        if (!loggedCustomer) {
+          res.render("views/loggingView", {
             error: true,
             message: "Brak użytkownika w bazie danych",
-            loggedUser: req.body,
+            loggedCustomer: req.body,
           });
           return;
         }
 
-        bcrypt.compare(req.body.password, user.password, (err, logged) => {
+        bcrypt.compare(req.body.password, customer.password, (err, logged) => {
           if (err) {
-            res.render("", {
+            res.render("views/loggingView", {
               error: true,
               message: "Błąd logowania",
-              loggedUser: { email: req.body.email, password: "" },
+              loggedCustomer: { email: req.body.email, password: "" },
             });
             return;
           }
 
           if (logged) {
-            const newToken = loggedUser.generateAuthToken(loggedUser);
+            const newToken = loggeCustomer.generateAuthToken(loggedCustomer);
             res.cookie("AddedToken", newToken);
-            res.redirect("");
+            res.redirect("addCustomer");
           } else {
-            res.render("", {
+            res.render("views/loggingView", {
               error: true,
               message: "Dane do logowania nie są ze sobą spójne",
-              loggedUser: { name: req.body.name, password: "" },
+              loggedCustomer: { name: req.body.name, password: "" },
             });
             return;
           }
@@ -62,6 +62,6 @@ module.exports = {
   },
   logout: (_req, res) => {
     res.clearCookie('AddedToken');
-    res.redirect('');
+    res.redirect('/loggedCustomer/login');
   }
 };

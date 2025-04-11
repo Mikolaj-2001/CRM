@@ -2,14 +2,15 @@ const mongoose = require("mongoose");
 
 const Customer = new mongoose.Schema(
   {
-    name: String,
+    fullName: String,
+    email: String,
     address: {
       street: String,
-      zipCode: String,
+      postCode: String,
       city: String,
     },
     nip: String,
-    phone: String
+    phoneNumber: String
   },
   { timestamps: true }
 );

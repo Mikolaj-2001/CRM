@@ -1,20 +1,21 @@
 <div class="container">
     <h2>Add user form</h2>
     <form action="/add" method="POST">
-        <label for="name">Nazwa</label>
-        <input type="text" name="name" id="name" required>
+        <label for="fullName">Pełna Nazwa Firmy</label>
+        <input type="text" name="fullName" id="fullName" required>
         <br>
         <label for="street">Ulica</label>
         <input type="text" name="street" id="street" required>
         <br>
-        <label for="zipCode">Kod</label>
-        <input type="text" name="zipCode" id="zipCode" required>
+        <label for="postCode">Kod pocztowy</label>
+        <input type="text" name="postCode" id="postCode" required>
         <br>
-         <label for="city">Miasto</label>
+        <label for="city">Miejscowość</label>
         <input type="text" name="city" id="city" required>
         <br>
         <label for="nip">NIP</label>
         <input type="text" name="nip" id="nip" required>
-        <button>Zapisz</button>
+
+        <button>Zapisz Dane</button>
     </form>
 </div>

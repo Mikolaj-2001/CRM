@@ -13,10 +13,12 @@
             {{#each customers}}
             <tr>
                 <td>{{ plusOne @index}}</td>
+                <br>
                 <td>{{this.name}}</td>
+                <br>
                 <td><a class="btn btn-primary" href="/{{this._id}}">Szczegóły</a><a class="btn btn-secondary" href="/edit/{{this._id}}">Edytuj</a></td>
             </tr>
-            {{/each}}
+            {{/each}} 
         </tbody>
     </table>
     <a href="/add" class="btn btn-primary">Dodaj klienta</a>

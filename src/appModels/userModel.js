@@ -2,17 +2,22 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const User = new mongoose.Schema(
+const Customer = new mongoose.Schema(
     {
-        name: { type: String, required: true, unique: true },
-        address: { type: String, required: true, unique: true },
-        company: { type: String, required: true, unique: true },
-        nip: { type: Number, required: true, unique: true },
+        fullName: { type: String, required: true, unique: true },
+        email: { type: String, required: true, unique: true },
         password: { type: String, required: true, unique: true },
-        posts: [
+        address: {
+            street: String,
+            postCode: String,
+            city: String,
+            required: true, unique: true
+        },
+        nip: { type: String, required: true, unique: true },
+        customers: [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: "newPost",
+                ref: "Customer",
             },
         ],
     },
@@ -22,9 +27,9 @@ const User = new mongoose.Schema(
 );
 
 User.pre("save", function (next) {
-    const newUser = this;
+    const newCustomer = this;
 
-    if (!newUser.isModified("password")) {
+    if (!newCustomer.isModified("password")) {
         return next();
     }
 
@@ -33,22 +38,22 @@ User.pre("save", function (next) {
             res.send(err);
         }
 
-        bcrypt.hash(newUser.password, salt, function (err, hash) {
+        bcrypt.hash(newCustomer.password, salt, function (err, hash) {
             if (err) {
                 res.send(err);
             }
 
-            newUser.password = hash;
+            newCustomer.password = hash;
             next();
         });
     });
 });
 
-User.methods.generateAuthToken = (user) => {
-    const newToken = jwt.sign({ _id: user._id }, process.env.TOKEN_KEY, {
+User.methods.generateAuthToken = (customer) => {
+    const newToken = jwt.sign({ _id: customer._id }, process.env.TOKEN_KEY, {
         expiresIn: "2h",
     });
     return newToken;
 };
 
-module.exports = mongoose.model("newUser", User);
+module.exports = mongoose.model("newCustomer", Customer);

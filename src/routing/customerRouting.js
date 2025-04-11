@@ -13,11 +13,11 @@ routing.post("/add", customerController.create);
 
 routing.get("/:id", customerController.customer);
 
-/* routing.get("/edit/:id", customerController.editForm);
+routing.get("/edit/:id", customerController.editForm);
 
 routing.post("/edit/:id", customerController.update);
 
-routing.get("/delete/:id", customerController.delete); */
+routing.delete("/delete/:id", customerController.delete);
 
 
 module.exports = routing
