@@ -43,21 +43,21 @@ module.exports = {
           }
 
           if (logged) {
-            const newToken = loggeCustomer.generateAuthToken(loggedCustomer);
+            const newToken = loggedCustomer.generateAuthToken(loggedCustomer);
             res.cookie("AddedToken", newToken);
             res.redirect("addCustomer");
           } else {
             res.render("views/loggingView", {
               error: true,
               message: "Dane do logowania nie są ze sobą spójne",
-              loggedCustomer: { name: req.body.name, password: "" },
+              loggedCustomer: { fullName: req.body.fullName, password: "" },
             });
             return;
           }
         });
       })
       .catch((err) => {
-        res.send(err);
+        res.status(500).send('Wystąpił błąd podczas logowania');
       });
   },
   logout: (_req, res) => {

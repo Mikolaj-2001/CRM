@@ -10,7 +10,11 @@ const Customer = new mongoose.Schema(
       city: String,
     },
     nip: String,
-    phoneNumber: String
+    phoneNumber: String,
+    customers: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref:"newCustomer"
+    },
   },
   { timestamps: true }
 );

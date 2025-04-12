@@ -1,25 +1,25 @@
 const express = require('express')
 const secondRouting = express.Router()
 
-const userController = require("../appControl/userCon")
+const customerController = require("../appControl/userControl")
 
 secondRouting.get('', (_req, res) => {
-    res.render('')
+    res.render('views/addCustomer')
 })
-secondRouting.post('', userController.create)
+secondRouting.post('/login', customerController.create)
 
-secondRouting.get('', (req, res) => {
+secondRouting.get('/login', (req, res) => {
     if (req.query.loginRedirect) {
-        res.render('', {
+        res.render('views/loggingView', {
             error: true,
             message: "Zaloguj się,aby uzyskać dostęp"
         })
         return
     }
-    res.render('')
+    res.render('views/loggingView')
 })
 
-secondRouting.post('', userController.login)
-secondRouting.get('', userController.logout)
+secondRouting.post('/login', customerController.login)
+secondRouting.get('/logout', customerController.logout)
 
 module.exports = secondRouting

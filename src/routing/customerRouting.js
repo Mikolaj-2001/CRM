@@ -1,7 +1,7 @@
 const express = require('express')
 const routing = express.Router()
 
-const customerController = require('../appControl/customerController')
+const customerController = require('../appControl/customerControl')
 
 routing.get('/', customerController.index)
 

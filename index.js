@@ -6,7 +6,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 
-mongoose.connect("mongodb://127.0.0.1:27017/CRM");
+// mongoose.connect("mongodb://127.0.0.1:27017/CRM");
 
 const userRouting = require('./src/routing/userRouting')
 const postRouting = require("./src/routing/customerRouting");

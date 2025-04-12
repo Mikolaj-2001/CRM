@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require("../appModels/userModel");
+const Customer = require("../appModels/userModel");
 
 module.exports = (req, res, next) => {
     const newToken = req.cookies['AddedToken']
@@ -7,10 +7,10 @@ module.exports = (req, res, next) => {
 
         try {
             const verified = jwt.verify(newToken, process.env.TOKEN_ACCESS);
-            User.findById(verified._id).then((customer) => {
-                res.locals.userId = customer._id;
-                res.locals.userName = customer.name;
-                res.locals.userEmail = customer.email
+            Customer.findById(verified._id).then((customer) => {
+                res.locals.customerId = customer._id;
+                res.locals.customerfullName = customer.fullName;
+                res.locals.customerEmail = customer.email
                 next();
             })
                 .catch((err) => {
@@ -18,11 +18,11 @@ module.exports = (req, res, next) => {
                 })
 
         } catch {
-            res.redirect('')
+            res.redirect('/customer/login?loginRedirect=true ')
         }
 
 
     } else {
-        res.redirect('')
+        res.redirect('/customer/login?loginRedirect=true')
     }
 }
