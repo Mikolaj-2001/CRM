@@ -1,10 +1,10 @@
 <div class="container4">
-    <h4>{{this.loggedCustomer}}</h4>
+    <h4>Zalagowany jest klient:{{this.loggedCustomer}}</h4>
 
     <ul>
         <p><b>Dane Klienta:</b></p>
         <br>
-        <li><b>{{this.fulName}}</b></li>
+        <li><b>{{this.fullName}}</b></li>
         <br>
         <li><b>{{this.address.street}}</b></li>
         <br>
@@ -17,19 +17,19 @@
         <li><b>{{this.phoneNumber}}</b></li>
     </ul>
 
-    {{#if }}
+    {{#if actions}}
     <ul>
-        {{#each}}
+        {{#each customers}}
         <li>
-            <b></b>
+            <b>{{this.meetingDate}}</b>
             <br>
-            <b></b>
+            <b>{{this.statusOfAsignment}}</b>
             <br>
-            <b></b>
+            <b>{{this.description}}</b>
             <br>
-            <b></b>
+            <b>{{this.ISBN}}</b>
             <br>
-            <b></b>
+            <b>{{this.financialRatingsId}}</b>
         </li>
         {{/each}}
     </ul>
@@ -37,5 +37,5 @@
     <p>Brak przypisanych działań</p>
     {{/if}}
 
-    <a href="/" class="btn btn-primary">Dodaj akcje</a>
+    <a href="/" class="btn btn-primary">Przypisz akcje/działanie</a>
 </div>

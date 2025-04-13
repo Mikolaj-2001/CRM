@@ -6,10 +6,10 @@ const path = require("path");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 
-// mongoose.connect("mongodb://127.0.0.1:27017/CRM");
+mongoose.connect("mongodb://127.0.0.1:27017/CRM");
 
 const userRouting = require('./src/routing/userRouting')
-const postRouting = require("./src/routing/customerRouting");
+const customerRouting = require("./src/routing/customerRouting");
 
 const authMiddelware = require('./src/middelwares/authMiddelware')
 
@@ -35,8 +35,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json());
 
-//app.use('', authMiddelware, userRouting)
-app.use("", postRouting);
+app.use('/', authMiddelware, userRouting)
+app.use("/add", customerRouting);
 
 app.listen(process.env.APP_PORT || 6010, function () {
   console.log("Serwer działa na porcie-" + (process.env.APP_PORT || 6010));

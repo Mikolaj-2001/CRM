@@ -1,13 +1,12 @@
 const Customer = require("../appModels/CustomerModel");
-const User = require("../appModels/userModel")
-const bcrypt = require('bcrypt')
 
 module.exports = {
-  index: (req, res) => {
+  index: (_req, res) => {
     Customer.find({})
       .lean()
-      .then((customers) => {
-        res.render("customerViews/customerList", { customers });
+      .then(function (customers) {
+        res.render("customerViews/customerList",
+          { customers });
       })
       .catch((err) => {
         res.send(err);
@@ -17,7 +16,7 @@ module.exports = {
     Customer.findById(req.params.id)
       .lean()
       .then((Customer) => {
-        res.render("views/", Customer);
+        res.render("/views", Customer);
       })
       .catch((err) => {
         res.send(err);
