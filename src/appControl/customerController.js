@@ -5,8 +5,7 @@ module.exports = {
     Customer.find({})
       .lean()
       .then(function (customers) {
-        res.render("customerViews/customerList",
-          { customers });
+        res.render("customerViews/listCustomers", { customers });
       })
       .catch((err) => {
         res.send(err);
@@ -14,16 +13,17 @@ module.exports = {
   },
   customer: (req, res) => {
     Customer.findById(req.params.id)
+      .populate("actions")
       .lean()
-      .then((Customer) => {
-        res.render("/views", Customer);
+      .then((customer) => {
+        res.render("customerViews/singleCustomer", customer);
       })
       .catch((err) => {
         res.send(err);
       });
   },
   create: (req, res) => {
-    const { fullName, nip, postCode, street, city } = req.body;
+    const { fullName, nip, postCode, street, city, phoneNumber } = req.body;
 
     const newCustomer = new Customer({
       fullName: fullName,
@@ -32,6 +32,7 @@ module.exports = {
         city: city,
         postCode: postCode,
       },
+      phoneNumber: phoneNumber,
       nip: nip,
     });
 
@@ -39,16 +40,29 @@ module.exports = {
       .save()
       .then((savedCustomer) => {
         console.log("Zapisane dane:", savedCustomer);
-        res.redirect(`/customerList`);
+        res.redirect(`/`);
       })
       .catch((err) => {
         res.send(err);
       });
   },
   update: (req, res) => {
-    Customer.findByIdAndUpdate(req.params.id, req.body)
-      .then((Customer) => {
-        res.redirect("/customerList/" + Customer._id);
+    const { fullName, nip, postCode, street, city, phoneNumber } = req.body;
+
+    const updatedCustomer = {
+      fullName: fullName,
+      address: {
+        street: street,
+        city: city,
+        postCode: postCode,
+      },
+      phoneNumber: phoneNumber,
+      nip: nip,
+    };
+
+    Customer.findByIdAndUpdate(req.params.id, updatedCustomer)
+      .then((customer) => {
+        res.redirect("/" + customer._id);
       })
       .catch((err) => {
         res.send(err);
@@ -57,14 +71,7 @@ module.exports = {
   delete: (req, res) => {
     Customer.findByIdAndDelete(req.params.id)
       .then(() => {
-        Customer.updateOne(
-          { _id: res.locals.userId },
-          { $pull: { posts: req.params.id } }
-        ).catch((err) => {
-          res.send(err);
-        });
-
-        res.redirect("/customerList");
+        res.redirect("/");
       })
       .catch((err) => {
         res.send(err);
@@ -72,8 +79,8 @@ module.exports = {
   },
   editForm: (req, res) => {
     Customer.findById(req.params.id)
-      .then((post) => {
-        res.render("views/appActionsAsigning", post);
+      .then((customer) => {
+        res.render("customerViews/editCustomer", customer);
       })
       .catch((err) => {
         res.send(err);

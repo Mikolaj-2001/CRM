@@ -11,10 +11,16 @@ const Customer = new mongoose.Schema(
     },
     nip: String,
     phoneNumber: String,
-    customers: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref:"newCustomer"
+      ref: "User",
     },
+    actions: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Action",
+      },
+    ],
   },
   { timestamps: true }
 );

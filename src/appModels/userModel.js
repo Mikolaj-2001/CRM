@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const newCustomer = new mongoose.Schema(
+const User = new mongoose.Schema(
     {
         fullName: { type: String, required: true, unique: true },
         email: { type: String, required: true, unique: true },
@@ -25,7 +25,7 @@ const newCustomer = new mongoose.Schema(
     }
 );
 
-newCustomer.pre("save", function (next) {
+User.pre("save", function (next) {
     const newCustomer = this;
 
     if (!newCustomer.isModified("password")) {
@@ -48,11 +48,11 @@ newCustomer.pre("save", function (next) {
     });
 });
 
-newCustomer.methods.generateAuthToken = (customer) => {
+User.methods.generateAuthToken = (customer) => {
     const newToken = jwt.sign({ _id: customer._id }, process.env.TOKEN_KEY, {
         expiresIn: "2h",
     });
     return newToken;
 };
 
-module.exports = mongoose.model("newCustomer", newCustomer);
+module.exports = mongoose.model("User", User);

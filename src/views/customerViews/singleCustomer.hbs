@@ -36,6 +36,7 @@
     {{else}}
     <p>Brak przypisanych działań</p>
     {{/if}}
-
-    <a href="/" class="btn btn-primary">Przypisz akcje/działanie</a>
+    <a href="/edit/{{this._id}}" class="btn btn-primary">Edytuj</a>
+    <a href="/delete/{{this._id}}" class="btn btn-danger">Usuń</a>
+    <a href="{{this._id}}/addAction" class="btn btn-primary">Przypisz akcje/działanie</a>
 </div>

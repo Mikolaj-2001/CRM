@@ -14,9 +14,13 @@
             <tr>
                 <td>{{ plusOne @index}}</td>
                 <br>
-                <td>{{this.name}}</td>
+                <td>{{this.fullName}}</td>
                 <br>
-                <td><a class="btn btn-primary" href="/{{this._id}}">Szczegóły</a><a class="btn btn-secondary" href="/edit/{{this._id}}">Edytuj</a></td>
+                <td>
+                    <a class="btn btn-primary" href="/{{this._id}}">Szczegóły</a>
+                    <a class="btn btn-secondary" href="/edit/{{this._id}}">Edytuj</a>
+                    <a class="btn btn-danger" href="/delete/{{this._id}}" >Usuń</a>
+                </td>
             </tr>
             {{/each}} 
         </tbody>
