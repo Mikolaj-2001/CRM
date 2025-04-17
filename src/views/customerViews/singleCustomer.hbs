@@ -1,5 +1,5 @@
 <div class="container4">
-    <h4>Zalagowany jest klient:{{this.loggedCustomer}}</h4>
+    <h4>Zalagowany jest klient:{{this.loggedCustomer._id}}</h4>
 
     <ul>
         <p><b>Dane Klienta:</b></p>
@@ -21,21 +21,18 @@
     <ul>
         {{#each customers}}
         <li>
-            <b>{{this.meetingDate}}</b>
+            <b>{{this.date}}</b>
             <br>
-            <b>{{this.statusOfAsignment}}</b>
+            <b>{{this.type}}</b>
             <br>
             <b>{{this.description}}</b>
-            <br>
-            <b>{{this.ISBN}}</b>
-            <br>
-            <b>{{this.financialRatingsId}}</b>
         </li>
         {{/each}}
     </ul>
     {{else}}
     <p>Brak przypisanych działań</p>
     {{/if}}
+    
     <a href="/edit/{{this._id}}" class="btn btn-primary">Edytuj</a>
     <a href="/delete/{{this._id}}" class="btn btn-danger">Usuń</a>
     <a href="{{this._id}}/addAction" class="btn btn-primary">Przypisz akcje/działanie</a>
