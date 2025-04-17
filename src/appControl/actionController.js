@@ -1,4 +1,4 @@
-const Actions = require("../appModels/actionsModel");
+const Action = require("../appModels/actionsModel");
 const { update } = require("./customerController");
 
 module.exports = {
@@ -8,7 +8,7 @@ module.exports = {
   create: (req, res) => {
     const { date, type, description } = req.body
 
-    const newAction = new Actions({
+    const newAction = new Action({
       date: date,
       type: type,
       description: description,
@@ -17,7 +17,7 @@ module.exports = {
       .save()
       .then((savedAction) => {
         console.log("Przypisane akcje:", savedAction);
-        res.redirect(`/`);
+        res.redirect("/");
       })
       .catch((err) => {
         res.send(err);
@@ -32,23 +32,14 @@ module.exports = {
       description: description,
     }
 
-    Actions.findOneAndUpdate(
-      { _id: req.params.id },
-      { $set: { date, type, description } },
-      { new: true },
-      updatedAction
-    )
-      .then((updatedAction) => {
-        if (!updatedAction) {
-          return res.status(404).send('Akcja nie została zidentyfikowana.');
-        }
-        res.render("/", { action: updatedAction });
-      }
-      )
+    Action.findByIdAndUpdate(req.params.id, updatedAction)
+      .then((action) => {
+        res.redirect("/" + action._id)
+      })
       .catch((err) => {
-        console.error("Błąd podczas aktualizacji akcji:", err);
-        res.status(500).send('Wystąpił błąd podczas aktualizacji akcji.');
+        res.send(err);
       });
+
   },
 
 }

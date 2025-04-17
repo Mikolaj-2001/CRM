@@ -40,7 +40,7 @@ module.exports = {
       .save()
       .then((savedCustomer) => {
         console.log("Zapisane dane:", savedCustomer);
-        res.redirect(`/`);
+        res.redirect("/");
       })
       .catch((err) => {
         res.send(err);
