@@ -2,19 +2,13 @@ const mongoose = require("mongoose");
 
 const Customer = new mongoose.Schema(
   {
-    fullName: String,
-    email: String,
+    name: { type: String, required: true },
     address: {
-      street: String,
-      postCode: String,
-      city: String,
+      street: { type: String, required: true },
+      city: { type: String, required: true },
+      zipcode: { type: String, required: true },
     },
-    nip: String,
-    phoneNumber: String,
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
+    nip: Number,
     actions: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -22,7 +16,9 @@ const Customer = new mongoose.Schema(
       },
     ],
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
 module.exports = mongoose.model("Customer", Customer);

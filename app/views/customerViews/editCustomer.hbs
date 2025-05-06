@@ -1,0 +1,24 @@
+<div class="container">
+    <h2>Edytuj klienta</h2>
+
+
+    <form action="/customers/edit/{{_id}}" method="POST">
+        <div class="mb-3">
+            <label for="name" class="from-label">Nazwa</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{name}}">  
+
+            <label for="street" class="from-label">Ulica</label>
+            <input type="text" class="form-control" id="street" value="{{address.street}}" name="address.street">  
+
+            <label for="city" class="from-label">Miasto</label>
+            <input type="text" class="form-control" id="city" value="{{address.city}}" name="address.city">  
+
+            <label for="zipcode" class="from-label">Kod pocztowy</label>
+            <input type="text" class="form-control" id="zipcode" value="{{address.zipcode}}" name="address.zipcode">  
+
+            <label for="nip" class="from-label">NIP</label>
+            <input type="number" class="form-control" id="nip" name="nip" value="{{nip}}">          
+        </div>
+        <button type="submit" class="btn btn-primary">Aktualizuj</button>
+    </form>
+</div>

@@ -1,0 +1,34 @@
+<div class="container">
+    <h2>Strona klienta</h2>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h2 class="card-title">{{name}}</h2>
+            <p class="card-text">{{address.street}}</p>
+            <p class="card-text">{{address.zipcode}} {{address.city}}</p>
+            <p class="card-text">NIP: {{nip}}</p>
+        </div>
+    </div>
+
+
+    <h2>Dodaj akcje</h2>
+
+    <form action="/customers/{{_id}}/actions/add" method="POST">
+    <input type="hidden" name="customerId" value="{{_id}}">
+        <div class="mb-3">
+            <label for="contactDate" class="from-label">Data kontaktu: </label>
+            <input type="date" class="form-control" id="contactDate" name="contactDate" required>
+
+            <label for="actionType" class="from-label">Rodzaj akcji: </label>
+            <select class="form-control" id="actionType" name="actionType" required>
+                <option value="" selected>---</option>
+                <option>Telefon</option>
+                <option>Spotkanie</option>
+                <option>Inne</option>
+            </select>
+            <label for="description" class="from-label">Opis akcji :</label>
+            <input type="textarea" class="form-control" id="description" name="description" required>
+        </div>
+        <button type="submit" class="btn btn-outline-secondary">Dodaj</button>
+    </form>
+</div>

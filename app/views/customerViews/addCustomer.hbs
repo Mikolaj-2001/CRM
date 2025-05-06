@@ -1,0 +1,38 @@
+<div class="container">
+    <h2>Dodaj klienta</h2>
+
+
+    <form action="/customers/add" method="POST">
+        <div class="mb-3">
+            <label for="name" class="from-label">Nazwa</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                    Osoba fizyczna
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Firma
+                </label>
+            </div>
+
+            <label for="street" class="from-label">Ulica</label>
+            <input type="text" class="form-control" id="street" name="address.street" required>
+
+            <label for="city" class="from-label">Miasto</label>
+            <input type="text" class="form-control" id="city" name="address.city" required>
+
+            <label for="zipcode" class="from-label">Kod pocztowy</label>
+            <input type="text" class="form-control" id="zipcode" name="address.zipcode" required>
+
+            <label for="nip" class="from-label">NIP</label>
+            <input type="number" class="form-control" id="nip" name="nip">
+
+        </div>
+        <button type="submit" class="btn btn-outline-primary">Dodaj</button>
+    </form>
+</div>

@@ -1,0 +1,30 @@
+<div class="container">
+    <h2>Edytuj akcję</h2>
+
+    <form action="/customers/{{customerId}}/actions/edit/{{action._id}}" method="POST">
+        <input type="hidden" name="customerId" value="{{action.customerId}}">{{!-- W wartości oznacza to:wstaw bądź wstawiono wartośc customerId dla akcji --}}
+        <div class="mb-3">
+            <label for="contactDate" class="form-label">Data kontaktu:</label>
+            <input 
+              type="date" 
+              class="form-control" 
+              id="contactDate" 
+              name="contactDate" 
+              value="{{action.contactDate}}" 
+              required>
+
+            <label for="actionType" class="form-label">Rodzaj akcji:</label>
+            <select class="form-control" id="actionType" name="actionType" required>
+                <option value="" {{#unless action.actionType}}selected{{/unless}}>---</option>
+                <option value="Telefon" {{#if action.isTelefon}}selected{{/if}}>Telefon</option>
+                <option value="Spotkanie" {{#if action.isSpotkanie}}selected{{/if}}>Spotkanie</option>
+                <option value="Inne" {{#if action.isInne}}selected{{/if}}>Inne</option>
+            </select>
+
+            <label for="description" class="form-label">Opis akcji:</label>
+            <textarea class="form-control" id="description" name="description" required>{{action.description}}</textarea>{{!-- Oznacza wpisz wartość description dla akcji --}}
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary">Zapisz zmiany</button>
+    </form>
+</div>

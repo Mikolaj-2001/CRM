@@ -1,0 +1,17 @@
+<div class="container">
+    <h2>Customers</h2>
+
+    {{#each customers}}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h2 class="card-title">{{name}}</h2>
+            <p class="card-text">{{address.street}}</p>
+            <p class="card-text">{{address.zipcode}} {{address.city}}</p>
+            <a href="/customers/{{_id}}/actions" class="btn btn-outline-primary">Wiecej</a>
+        </div>
+    </div>
+    {{/each}}
+
+    <a href="/customers/add" class="btn btn-outline-success">Dodaj klienta</a>
+
+</div>

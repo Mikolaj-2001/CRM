@@ -1,43 +1,42 @@
-require("dotenv").config();
 const express = require("express");
 const app = express();
 const hbs = require("express-handlebars");
-const path = require("path");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
+const authMiddleware = require("./app/middlewares/authMiddleware");
+const path = require("path");
+const dayjs = require("dayjs");/* Pakiet zawierający funkcje odczytu dat i czasu,jak i zapisu ich w czytelnym formacie */
 
-mongoose.connect("mongodb://127.0.0.1:27017/CRM-mikolaj");
+mongoose.connect("mongodb://127.0.0.1:27017/project-2");
 
-const userRouting = require("./src/routing/userRouting");
-const customerRouting = require("./src/routing/customerRouting");
-
-const authMiddelware = require("./src/middelwares/authMiddelware");
+const customerRouter = require("./app/router/customerRouter");
+const userRouter = require("./app/router/userRouter");
 
 app.engine(
   "hbs",
   hbs.engine({
     extname: ".hbs",
-    defaultLayout: "main",
-    layoutsDir: path.join(__dirname, "src/views/layouts"),
-    helpers: {
-      plusOne: function (value) {
-        return value + 1;
-      },
+    helpers: {/* Obiekt przekazujący funkcje dla silnika widoku,aby z łatwością obsługiwał format dat i czasu */
+        formatDate: (date) => {
+            return dayjs(date).format("YYYY-MM-DD HH:mm");/* Tworzy czytelny zapis daty z odczytanego formatu daty przesłąnego przez serwer na stronie */
+          },
     },
   })
 );
+app.set("view engine", "hbs");
+app.set("views", path.join(__dirname, "app/views"));
 
-app.set("view engine", ".hbs");
-app.set("views", path.join(__dirname, "src/views"));
-
-app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json());
 
-//app.use('/', authMiddelware, userRouting)
-app.use("/", customerRouting);
+app.use("/customers", authMiddleware, customerRouter);
+app.use("/user", userRouter);
 
-app.listen(process.env.APP_PORT || 6010, function () {
-  console.log("Serwer działa na porcie-" + (process.env.APP_PORT || 6010));
+app.get("/", function (_req, res) {
+  res.redirect("/customers");
+});
+
+app.listen(8080, function () {
+  console.log("Serwer Node.js działa");
 });

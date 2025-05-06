@@ -1,0 +1,49 @@
+<div class="container">
+    <h2>Customer page</h2>
+
+    <div class="card mb-3">
+        <div class="card-body">
+
+            <h2 class="card-title">{{name}}</h2>
+            <p class="card-text">{{address.street}}</p>
+            <p class="card-text">{{address.zipcode}} {{address.city}}</p>
+            <p class="card-text">NIP: {{nip}}</p>
+
+
+            <a href="/customers/edit/{{_id}}" class="btn btn-outline-primary">Edytuj</a>
+            <a href="/customers/delete/{{_id}}" class="btn btn-outline-danger">Usun</a>
+
+        </div>
+    </div>
+
+    <a href="/customers/{{_id}}/actions/add" class="btn btn-outline-success">Dodaj akcje</a> 
+
+</div>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>{{!--scope oznacza,że dany tytuł w tym przypadku tyczys sie pól komórek poniżej--}}
+                <th scope="col">Data kontaktu</th>
+                <th scope="col">Sposob kontaktu</th>
+                <th scope="col">Opis</th>
+                <th scope="col">Działania</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each actions}}
+            <tr>
+                <th scope="row">{{@index}}</th>
+                <td>{{formatDate contactDate}}</td>
+                <td>{{actionType}}</td>
+                <td>{{description}}</td>
+                <td>
+                    <a class="btn btn-primary" href="/customers/{{../_id}}/actions/edit/{{_id}}">Edytuj</a>{{!-- konstrukcja {{../_id}} odwołuje się do id z poziomu rodzica.aby uzyskać id zawarte wewnątrz rodzica(inaczej mówiąc do podrzędnego id,a nie nadrzędnego--}}
+                    <a class="btn btn-danger" href="/customers/{{../_id}}/actions/delete/{{_id}}">Usuń</a>    
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
